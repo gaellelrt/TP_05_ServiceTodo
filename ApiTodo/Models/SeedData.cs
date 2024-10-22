@@ -29,6 +29,22 @@ public class SeedData{
                 todo3
             );
 
+            Agenda agenda1 = new Agenda
+            {
+                Nom = "Chores",
+                Todos = [todo1, todo2]
+            };
+
+            Agenda agenda2 = new Agenda
+            {
+                Nom = "Holidays"
+                
+            };
+            context.Agendas.AddRange(
+                agenda1,
+                agenda2
+            );
+
             context.SaveChanges();
 
         }

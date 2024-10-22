@@ -1,0 +1,16 @@
+@startuml evolution
+
+class Agenda{
+    + String Nom
+    + int Id
+}
+
+class Todo{
+    + int Id
+    + string Task 
+    + bool Completed
+    + DateTime Deadline
+}
+
+Agenda "1" *__ "0..*" Todo : contient
+@enduml

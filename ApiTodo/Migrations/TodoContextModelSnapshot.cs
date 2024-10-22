@@ -16,10 +16,28 @@ namespace ApiTodo.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
 
+            modelBuilder.Entity("Agenda", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Agendas");
+                });
+
             modelBuilder.Entity("Todo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AgendaId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("Completed")
@@ -34,7 +52,23 @@ namespace ApiTodo.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AgendaId");
+
                     b.ToTable("Todos");
+                });
+
+            modelBuilder.Entity("Todo", b =>
+                {
+                    b.HasOne("Agenda", "Agenda")
+                        .WithMany("Todos")
+                        .HasForeignKey("AgendaId");
+
+                    b.Navigation("Agenda");
+                });
+
+            modelBuilder.Entity("Agenda", b =>
+                {
+                    b.Navigation("Todos");
                 });
 #pragma warning restore 612, 618
         }
